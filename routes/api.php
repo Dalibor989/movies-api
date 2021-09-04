@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\AuthController;
 use App\Http\Middleware\CheckForDuplicates;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,9 @@ Route::get('/movies/{movie}', [MovieController::class, 'show']);
 Route::post('/movies', [MovieController::class, 'store'])->middleware(CheckForDuplicates::class);
 Route::put('/movies/{movie}', [MovieController::class, 'update']);
 Route::delete('/movies/{movie}', [MovieController::class, 'destroy']);
+
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/refresh', [AuthController::class, 'refreshToken']);
+Route::post('/auth/logout', [AuthController::class, 'logout']);
+Route::get('/auth/me', [AuthController::class, 'getMyProfile']);

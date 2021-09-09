@@ -12,10 +12,10 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $title = $request->query('title');
-        $take = $request->query('take');
-        $skip = $request->query('skip');
+        $per_page = $request->query('per_page', 15);
 
-        $movies = Movie::search_by_title($title, $take, $skip);
+        $movies = Movie::search_by_title($title)
+            ->paginate($per_page);
 
         return response()->json($movies);
     }

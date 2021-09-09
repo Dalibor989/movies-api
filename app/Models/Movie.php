@@ -19,21 +19,17 @@ class Movie extends Model
     ];
 
 
-    public static function search_by_title($title = null, $take = null, $skip = null)
+    public static function search_by_title($title = null)
     {
         $query = self::query();
 
         if ($title) {
             $title = strtolower($title);
-            // get anything that contains $title
+
             $query->whereRaw('lower(title) like "%' . $title . '%"');
         }
 
-        if ($take != null && $skip != null) {
-            $query->take($take)
-                ->skip($skip);
-        }
-
-        return $query->get();
+        return $query;
     }
 }
+
